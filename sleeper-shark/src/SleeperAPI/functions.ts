@@ -1,4 +1,4 @@
-import { User } from "./models.ts";
+import {  GetUserResponse, User } from "./models.ts";
 import { RateLimiter } from "./rateLimiter.ts";
 
 
@@ -30,5 +30,12 @@ export async function getTeamData(teamId: string) {
 }
 
 export async function getManagerData(userID: string):Promise<User> {
-    return rateLimiter.enqueue(() => fetchFromSleeperAPI<User>(`user/${userID}`))
+    const userData = await rateLimiter.enqueue(() => fetchFromSleeperAPI<GetUserResponse>(`user/${userID}`));
+    
+    return {
+        user_id: userData.user_id,
+        username: userData.username,
+        display_name: userData.display_name,
+        avatar: userData.avatar
+    }
 }
