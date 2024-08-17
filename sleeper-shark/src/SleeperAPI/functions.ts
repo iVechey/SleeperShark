@@ -1,4 +1,5 @@
-import {  GetUserResponse, User } from "./models.ts";
+import { LeagueOverview } from "../Layouts/_models.ts";
+import {  GetUserResponse, League, User } from "./models.ts";
 import { RateLimiter } from "./rateLimiter.ts";
 
 
@@ -29,7 +30,7 @@ export async function getTeamData(teamId: string) {
     return rateLimiter.enqueue(() => fetchFromSleeperAPI(`teams/${teamId}`));
 }
 
-export async function getManagerData(userID: string):Promise<User> {
+export async function getUserData(userID: string):Promise<User> {
     const userData = await rateLimiter.enqueue(() => fetchFromSleeperAPI<GetUserResponse>(`user/${userID}`));
     
     return {
@@ -38,4 +39,23 @@ export async function getManagerData(userID: string):Promise<User> {
         display_name: userData.display_name,
         avatar: userData.avatar
     }
+}
+
+export async function getAllLeaguesForUser(userId: string): Promise<LeagueOverview[]> {
+
+    
+    const leagueData = await rateLimiter.enqueue(() => fetchFromSleeperAPI<League[]>(`user/${userId}/leagues/nfl/2024`))
+
+    const leaugeOverviews = leagueData.map(league => ({
+        
+            id: league.league_id,
+            name: league.name,
+            ppr: league.scoring_settings.rec,
+            te_ppr: league.scoring_settings.bonus_rec_te,
+            managers: league.total_rosters
+    }))
+
+
+
+    return leaugeOverviews
 }
