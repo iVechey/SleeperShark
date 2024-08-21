@@ -1,14 +1,13 @@
-
-import { useEffect, useState } from 'react';
-import { getAllLeaguesForUser, getUserData } from './SleeperAPI/functions';
-import { League, User } from './SleeperAPI/models';
-import { LeagueDisplayer } from './Layouts/LeagueDisplayer';
-import { LeagueOverview } from './Layouts/_models';
-import { CoreLayout } from './Layouts/CoreLayout';
+import React from 'react';
+import { Body} from './Layouts/Body';
+import './App.css';
+import { Header } from './Layouts/Header';
 
 export function App() {
-
-  return <CoreLayout />
-  
+  return (
+    <div className='App'>
+      <Header />
+      <Body/>
+    </div>
+  );
 }
-

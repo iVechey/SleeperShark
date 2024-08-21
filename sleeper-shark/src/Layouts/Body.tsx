@@ -3,9 +3,9 @@ import { User } from '../SleeperAPI/models';
 import { LeagueOverview } from './_models';
 import { getAllLeaguesForUser, getUserData } from '../SleeperAPI/functions';
 import { LeagueDisplayer } from './LeagueDisplayer';
-import './CoreLayout.css';
+import './Body.css';
 
-export function CoreLayout() {
+export function Body() {
   const [username, setUsername] = useState<string>('');
   const [user, setUser] = useState<User | null>(null);
   const [leagues, setLeagues] = useState<LeagueOverview[]>([]);
@@ -43,7 +43,7 @@ export function CoreLayout() {
     : leagues;
 
   return (
-    <div className="core-layout">
+    <div className='App-body'>
       <div className="input-section">
         <input
           type="text"

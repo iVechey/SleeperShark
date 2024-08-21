@@ -1,0 +1,39 @@
+.App-header {
+    
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: calc(10px + 2vmin);
+    background-color: slategray;
+    height: 100px
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .logo {
+    height: 50px;
+  }
+  
+  .header-icons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .settings-icon {
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .settings-icon:hover {
+    color: #61dafb;
+  }
+  
